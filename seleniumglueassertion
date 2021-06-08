@@ -1,0 +1,382 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package com.standardchartered.genie.module.selenium.glue;
+
+import com.standardchartered.genie.annotation.GenieInfo;
+import com.standardchartered.genie.model.GenieScenario;
+import com.standardchartered.genie.module.java.transformer.TimeUnitTransformer;
+import com.standardchartered.genie.module.selenium.core.SeleniumService;
+import com.standardchartered.genie.module.selenium.core.util.SeleniumAssertionUtil;
+import com.standardchartered.genie.module.selenium.core.util.SeleniumThickClientAssertionUtil;
+import com.standardchartered.genie.module.selenium.glue.transformer.AllChildElementsTransformer;
+import com.standardchartered.genie.module.selenium.glue.transformer.LookupByTransformer;
+import cucumber.api.DataTable;
+import cucumber.api.Scenario;
+import cucumber.api.Transform;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.pickles.PickleCell;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class SeleniumGlueAssertion {
+    private GenieScenario genieScenario;
+    private SeleniumService service;
+
+    public SeleniumGlueAssertion() {
+    }
+
+    @Before({"@selenium"})
+    public void beforeScenario(Scenario scenario) {
+        this.genieScenario = (GenieScenario)scenario;
+        this.service = (SeleniumService)this.genieScenario.getRuntime().getAttribute("seleniumService");
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the web page title is equal to the input text.",
+        tags = "selenium,assertion,browser"
+    )
+    @Then("^assert that title is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertWebPageTitleIs(String title, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertWebPageTitleIs(this.service.getWebDriverWait(duration, timeUnit), title);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the web page title contains the input text.",
+        tags = "selenium,assertion,browser"
+    )
+    @Then("^assert that title contains '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertWebPageTitleContains(String text, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertWebPageTitleContains(this.service.getWebDriverWait(duration, timeUnit), text);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element's text is equal to the given text.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextIsEqualOnElement(@Transform(LookupByTransformer.class) By lookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextToBeEqualInElement(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element's text is equal to the given text in the DocString.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextIsEqualOnElementWIthDocstring(@Transform(LookupByTransformer.class) By lookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextToBeEqualInElement(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element's text is empty.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is empty(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextIsEmpty(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextToBeEmpty(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element's text is not empty.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is not empty(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextIsNotEmpty(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextToBeNotEmpty(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the web element's text contains the given text.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' contains '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextIsPresentOnElement(@Transform(LookupByTransformer.class) By elementLookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextIsPresentOnElement(this.service.getWebDriverWait(duration, timeUnit), elementLookup, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the web element's text contains the given text in the DocString.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' contains(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextInDocStringIsPresentOnElement(@Transform(LookupByTransformer.class) By elementLookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertTextIsPresentOnElement(this.service.getWebDriverWait(duration, timeUnit), elementLookup, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified attribute of the element matches given text.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that attribute '(.+)' of '(.+)' matches '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementAttributeMatches(String attributeName, @Transform(LookupByTransformer.class) By lookup, String expected, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementAttributeMatches(this.service.getWebDriverWait(duration, timeUnit), lookup, attributeName, expected);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified attribute of the element contains given text.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that attribute '(.+)' of '(.+)' contains '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementAttributeContains(String attributeName, @Transform(LookupByTransformer.class) By lookupBy, String expected, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementAttributeContains(this.service.getWebDriverWait(duration, timeUnit), lookupBy, attributeName, expected);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified attribute of the element is not empty.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that attribute '(.+)' of '(.+)' is not empty(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementAttributeIsNotEmpty(String attributeName, @Transform(LookupByTransformer.class) By elementLookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementAttributeIsNotEmpty(this.service.getWebDriverWait(duration, timeUnit), elementLookup, attributeName);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified attribute of the element is empty.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that attribute '(.+)' of '(.+)' is empty(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementAttributeIsEmpty(String attributeName, @Transform(LookupByTransformer.class) By elementLookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementAttributeMatches(this.service.getWebDriverWait(duration, timeUnit), elementLookup, attributeName, "");
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the current url matches the expectation.",
+        tags = "selenium,assertion,browser,url"
+    )
+    @When("^assert that current url is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertCurrentUrl(String expectedUrl, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertCurrentUrlEquals(this.service.getWebDriverWait(duration, timeUnit), expectedUrl);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the current url contains the expectation.",
+        tags = "selenium,assertion,browser,url"
+    )
+    @When("^assert that current url contains '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertCurrentUrlContains(String expectedUrlFragment, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertCurrentUrlContains(this.service.getWebDriverWait(duration, timeUnit), expectedUrlFragment);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the current url matches against the given regular expression.",
+        tags = "selenium,assertion,browser,url,regex"
+    )
+    @When("^assert that current url matches the regex '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertCurrentUrlMatches(String regex, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertCurrentUrlMatches(this.service.getWebDriverWait(duration, timeUnit), regex);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is visible.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is visible(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsVisible(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsVisible(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is not visible.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is not visible(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsNotVisible(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsNotVisible(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is visible within parent.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is visible within parent '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsVisibleWithinParentElement(@Transform(LookupByTransformer.class) By parent, @Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsVisibleWithinParentElement(this.service.getWebDriverWait(duration, timeUnit), parent, lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is not visible within parent.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is not visible within parent '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsNotVisibleWithinParentElement(@Transform(LookupByTransformer.class) By parent, @Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsNotVisibleWithinParentElement(this.service.getWebDriverWait(duration, timeUnit), parent, lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is clickable.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is clickable(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsClickable(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsClickable(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is not clickable.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is not clickable(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsNotClickable(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsNotClickable(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is enabled.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is enabled(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsEnabled(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsEnabled(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element specified is disabled.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that '(.+)' is disabled(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertElementIsDisabled(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertElementIsDisabled(this.service.getWebDriverWait(duration, timeUnit), lookup);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that an alert/popup has been displayed.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that alert has been raised(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertAlertHasBeenRaised(Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.isAlertIsPresent(this.service.getWebDriverWait(duration, timeUnit));
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the alert/popup has the expected message.",
+        tags = "selenium,assertion"
+    )
+    @And("^assert that alert message is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTextEqualsAlertMessage(String expectedMessage, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.assertAlertMessageEquals(this.service.getWebDriverWait(duration, timeUnit), expectedMessage);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element is selected.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is selected(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertThatCheckboxNamedAsIsSelected(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.checkElementSelectionStateIs(this.service.getWebDriverWait(duration, timeUnit), lookup, true);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the element is NOT selected.",
+        tags = "selenium,assertion"
+    )
+    @Then("^assert that '(.+)' is not selected(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertThatCheckboxNamedAsIsNotSelected(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.checkElementSelectionStateIs(this.service.getWebDriverWait(duration, timeUnit), lookup, false);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the list of text exists within the parent element.",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that elements within '(.+)' contains$")
+    public void assertThatSetOfElementContains(@Transform(AllChildElementsTransformer.class) List<WebElement> actualElement, List<String> expected) {
+        List<String> strings = SeleniumAssertionUtil.extractTextFromWebElementList(actualElement);
+        SeleniumAssertionUtil.assertElementSetContains(strings, expected);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the table of text exists within the parent element.",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that elements within '(.+)' contains table$")
+    public void assertThatTableOfElementContains(@Transform(AllChildElementsTransformer.class) List<WebElement> actualElement, List<List<String>> expected) {
+        List<List<String>> strings = SeleniumAssertionUtil.extractTextFromWebElementTable(actualElement);
+        SeleniumAssertionUtil.assertElementTableContains(strings, expected);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the list of element's text value matches against all the elements within the parent element.",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that elements within '(.+)' is$")
+    public void assertThatSetOfElementEquals(@Transform(AllChildElementsTransformer.class) List<WebElement> actualElement, List<String> expected) {
+        List<String> strings = SeleniumAssertionUtil.extractTextFromWebElementList(actualElement);
+        SeleniumAssertionUtil.assertElementSetEquals(strings, expected);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the number of elements visible is equal to the specified amount",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that there are exactly '(\\d+)' visible '(.+)' elements(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertNumberOfMatchingElementsIs(Integer expectedNumberOfElements, @Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.numberOfMatchingElementsIs(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedNumberOfElements);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the number of elements visible is more than specified amount.",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that there are more than '(\\d+)' visible '(.+)' elements(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertNumberOfMatchingElementsIsMoreThan(Integer expectedNumberOfElements, @Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.numberOfMatchingElementsIsMoreThan(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedNumberOfElements);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert the number of elements visible is less than specified amount.",
+        tags = "selenium,assertion"
+    )
+    @When("^assert that there are less than '(\\d+)' visible '(.+)' elements(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertNumberOfMatchingElementsIsLessThan(Integer expectedNumberOfElements, @Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumAssertionUtil.numberOfMatchingElementsIsLessThan(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedNumberOfElements);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the selected combo box element's text matches the exact given text.",
+        tags = "selenium,thick-client,combo-box,assertion"
+    )
+    @Then("^assert that combo box '(.+)' selected value is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertComboBoxMatches(@Transform(LookupByTransformer.class) By lookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumThickClientAssertionUtil.assertTextToBeEqualInComboBox(this.service.getWebDriverWait(duration, timeUnit), lookup, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the selected list element's text matches the exact given text.",
+        tags = "selenium,thick-client,list,assertion"
+    )
+    @Then("^assert that list '(.+)' selected values are as follows(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertListMatches(@Transform(LookupByTransformer.class) By lookup, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit, DataTable table) {
+        List<String> texts = new ArrayList();
+        table.getPickleRows().forEach((row) -> {
+            texts.add(((PickleCell)row.getCells().get(0)).getValue());
+        });
+        SeleniumThickClientAssertionUtil.assertTextToBeEqualInSelectedList(this.service.getWebDriverWait(duration, timeUnit), lookup, texts);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified cell in table matches the exact given text.",
+        tags = "selenium,thick-client,table,assertion"
+    )
+    @Then("^assert that row '(.+)' and column '(.+)' of table '(.+)' is '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTableCellMatches(int row, int column, @Transform(LookupByTransformer.class) By elementLookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumThickClientAssertionUtil.assertTextToBeEqualInSpecifiedCell(this.service.getWebDriverWait(duration, timeUnit), elementLookup, row, column, expectedText);
+    }
+
+    @GenieInfo(
+        shortDescription = "Assert that the specified cell in table contains given text.",
+        tags = "selenium,thick-client,table,assertion"
+    )
+    @Then("^assert that row '(.+)' and column '(.+)' of table '(.+)' contains '(.+)'(?: which times out (?:in|after) (\\d+) (.+))?$")
+    public void assertTableCellContains(int row, int column, @Transform(LookupByTransformer.class) By elementLookup, String expectedText, Long duration, @Transform(TimeUnitTransformer.class) TimeUnit timeUnit) {
+        SeleniumThickClientAssertionUtil.assertTextToBePresentInSpecifiedCell(this.service.getWebDriverWait(duration, timeUnit), elementLookup, row, column, expectedText);
+    }
+}
